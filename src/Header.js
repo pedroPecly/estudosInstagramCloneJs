@@ -28,22 +28,22 @@ function Header(props) {
 
     function abrirModalUpload(e) {
         e.preventDefault();
-        let modalCriarConta = document.querySelector('.modalUpload');
+        let modalUpload = document.querySelector('.modalUpload');
 
-        modalCriarConta.style.display = 'block';
+        modalUpload.style.display = 'block';
     }
 
     function fecharModalUpload() {
-        let modalCriarConta = document.querySelector('.modalUpload');
+        let modalUpload = document.querySelector('.modalUpload');
 
-        modalCriarConta.style.display = 'none';
+        modalUpload.style.display = 'none';
     }
 
     function uploadPost(e) {
         e.preventDefault();
 
         let textoPost = document.getElementById('texto_post').value;
-        let progressEl = document.getElementById('progressUpload');
+        let modalUpload = document.querySelector('.modalUpload');
 
         const uploadTask = storage.ref(`images/${file.name}`).put(file);
 
@@ -67,6 +67,7 @@ function Header(props) {
                 alert('upload feito com sucesso!');
 
                 document.getElementById('formUpload').reset()
+                modalUpload.style.display = 'none';
             });
         });
     }
