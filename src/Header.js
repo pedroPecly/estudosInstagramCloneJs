@@ -124,9 +124,9 @@ function Header(props) {
                     <div onClick={() => fecharModalUpload()} className='closeModalUpload'>X</div>
                     <h2>Fazer post</h2>
                     <form id='formUpload' onSubmit={(e) => uploadPost(e)}>
-                        <progress id='progressUpload' value={progress}></progress>
                         <input type='text' id='texto_post' placeholder='texto para postagem...'></input>
                         <input onChange={(e) => setFile(e.target.files[0])} type='file' name='file'></input>
+                        <progress id='progressUpload' value={progress}></progress>
                         <input type='submit' value='Fazer post!'></input>
                     </form>
                 </div>
