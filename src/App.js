@@ -1,6 +1,6 @@
 import './style/App.css';
 import React from 'react';
-import { db } from './firebase.js';
+import { db, auth } from './firebase.js';
 import { useEffect, useState } from 'react';
 import Post from './Post.js';
 import Header from './Header.js';
@@ -10,6 +10,9 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    auth.onAuthStateChanged((val) => {
+      setUser(val.displayName);
+    });
     db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
       setPosts(snapshot.docs.map((document) => {
         return {
@@ -28,7 +31,7 @@ function App() {
       {
         posts.map((val) => {
           return (
-            <Post info={val.info} id={val.id}></Post>
+            <Post user={user} info={val.info} id={val.id}></Post>
           )
         })
       }

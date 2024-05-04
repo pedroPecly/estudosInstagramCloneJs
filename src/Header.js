@@ -50,10 +50,10 @@ function Header(props) {
         uploadTask.on('stage_changed', (snapshot) => {
             const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setProgress(progress);
-        }, (erro)=>{
+        }, (erro) => {
 
-        }, ()=>{
-            storage.ref('images').child(file.name).getDownloadURL().then((url)=>{
+        }, () => {
+            storage.ref('images').child(file.name).getDownloadURL().then((url) => {
                 db.collection('posts').add({
                     texto: textoPost,
                     image: url,
@@ -67,7 +67,7 @@ function Header(props) {
                 alert('upload feito com sucesso!');
 
                 document.getElementById('formUpload').reset()
-                modalUpload.style.display = 'none';
+                fecharModalUpload();
             });
         });
     }
@@ -100,8 +100,17 @@ function Header(props) {
         auth.signInWithEmailAndPassword(credenciais, senha).then((auth) => {
             props.setUser(auth.user.displayName);
             alert('logado com sucesso');
+            window.location.href = '/';
         }).catch((error) => {
             alert(error.message);
+        });
+    }
+
+    function deslogar(e) {
+        e.preventDefault();
+        auth.signOut().then((val) => {
+            props.setUser(null);
+            window.location.href = '/';
         });
     }
 
@@ -140,6 +149,7 @@ function Header(props) {
                         <div className='header_logadoInfo'>
                             <span>Olá, <b>{props.user}</b></span>
                             <a onClick={(e) => abrirModalUpload(e)} href='#'> Postar!</a>
+                            <a onClick={(e) => deslogar(e)}>Deslogar!</a>
                         </div>
                         :
                         <div className='header_loginForm'>

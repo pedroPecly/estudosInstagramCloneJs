@@ -199,13 +199,14 @@ body {
 
 .postSingle {
     background-color: white;
-    max-width: 700px;
+    max-width: 600px;
     margin: 10px auto;
 
 }
 
 .postSingle img {
     width: 100%;
+    max-height: 400px;
 }
 
 .postSingle p {
