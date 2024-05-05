@@ -11,7 +11,9 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((val) => {
-      setUser(val.displayName);
+      if(val != null){
+        setUser(val.displayName);
+      }
     });
     db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
       setPosts(snapshot.docs.map((document) => {

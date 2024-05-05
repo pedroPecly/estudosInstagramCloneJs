@@ -50,8 +50,6 @@ function Header(props) {
         uploadTask.on('stage_changed', (snapshot) => {
             const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setProgress(progress);
-        }, (erro) => {
-
         }, () => {
             storage.ref('images').child(file.name).getDownloadURL().then((url) => {
                 db.collection('posts').add({
